@@ -35,27 +35,17 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-search.js"></script>
-        <script src="data/BuchananCommunity_1.js"></script>
+        <script src="data/Ondo_WO_1_1.js"></script>
+        <script src="data/BuchananCommunity_2.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
-
-            if (e.target.feature.geometry.type === 'LineString' || e.target.feature.geometry.type === 'MultiLineString') {
-              highlightLayer.setStyle({
-                color: '#ffff00',
-              });
-            } else {
-              highlightLayer.setStyle({
-                fillColor: '#ffff00',
-                fillOpacity: 1
-              });
-            }
             highlightLayer.openPopup();
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[5.868233638182409,-10.059780957644495],[5.897108940871365,-10.010195296280099]]);
+        }).fitBounds([[5.852686673572001,-10.074338386449103],[5.9104373922654005,-9.975365208221387]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -116,14 +106,121 @@
         });
         layer_googlesatellite_0;
         map.addLayer(layer_googlesatellite_0);
-        function pop_BuchananCommunity_1(feature, layer) {
+        function pop_Ondo_WO_1_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
-                    for (var i in e.target._eventParents) {
-                        if (typeof e.target._eventParents[i].resetStyle === 'function') {
-                            e.target._eventParents[i].resetStyle(e.target);
-                        }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
                     }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? autolinker.link(feature.properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['timestamp'] !== null ? autolinker.link(feature.properties['timestamp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['begin'] !== null ? autolinker.link(feature.properties['begin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['end'] !== null ? autolinker.link(feature.properties['end'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['altitudeMode'] !== null ? autolinker.link(feature.properties['altitudeMode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tessellate'] !== null ? autolinker.link(feature.properties['tessellate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['extrude'] !== null ? autolinker.link(feature.properties['extrude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['visibility'] !== null ? autolinker.link(feature.properties['visibility'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['drawOrder'] !== null ? autolinker.link(feature.properties['drawOrder'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['icon'] !== null ? autolinker.link(feature.properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['cluster_of'] !== null ? autolinker.link(feature.properties['cluster_of'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['area_km2'] !== null ? autolinker.link(feature.properties['area_km2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['building_c'] !== null ? autolinker.link(feature.properties['building_c'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['large_buil'] !== null ? autolinker.link(feature.properties['large_buil'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['percentage'] !== null ? autolinker.link(feature.properties['percentage'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['building_a'] !== null ? autolinker.link(feature.properties['building_a'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['building_1'] !== null ? autolinker.link(feature.properties['building_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['percenta_1'] !== null ? autolinker.link(feature.properties['percenta_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['state'] !== null ? autolinker.link(feature.properties['state'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['distance'] !== null ? autolinker.link(feature.properties['distance'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_Ondo_WO_1_1_0() {
+            return {
+                pane: 'pane_Ondo_WO_1_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Ondo_WO_1_1');
+        map.getPane('pane_Ondo_WO_1_1').style.zIndex = 401;
+        map.getPane('pane_Ondo_WO_1_1').style['mix-blend-mode'] = 'normal';
+        var layer_Ondo_WO_1_1 = new L.geoJson(json_Ondo_WO_1_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Ondo_WO_1_1',
+            layerName: 'layer_Ondo_WO_1_1',
+            pane: 'pane_Ondo_WO_1_1',
+            onEachFeature: pop_Ondo_WO_1_1,
+            style: style_Ondo_WO_1_1_0,
+        });
+        bounds_group.addLayer(layer_Ondo_WO_1_1);
+        map.addLayer(layer_Ondo_WO_1_1);
+        function pop_BuchananCommunity_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
                         layer.closePopup();
                     } else {
@@ -159,11 +256,11 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_BuchananCommunity_1_0(feature) {
+        function style_BuchananCommunity_2_0(feature) {
             switch(String(feature.properties['Cluster Name'])) {
                 case 'A':
                     return {
-                pane: 'pane_BuchananCommunity_1',
+                pane: 'pane_BuchananCommunity_2',
                 opacity: 1,
                 color: 'rgba(251,106,74,1.0)',
                 dashArray: '',
@@ -176,7 +273,7 @@
                     break;
                 case 'B':
                     return {
-                pane: 'pane_BuchananCommunity_1',
+                pane: 'pane_BuchananCommunity_2',
                 opacity: 1,
                 color: 'rgba(91,208,183,1.0)',
                 dashArray: '',
@@ -189,7 +286,7 @@
                     break;
                 case 'C':
                     return {
-                pane: 'pane_BuchananCommunity_1',
+                pane: 'pane_BuchananCommunity_2',
                 opacity: 1,
                 color: 'rgba(234,83,206,1.0)',
                 dashArray: '',
@@ -202,7 +299,7 @@
                     break;
                 case 'D':
                     return {
-                pane: 'pane_BuchananCommunity_1',
+                pane: 'pane_BuchananCommunity_2',
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -215,37 +312,37 @@
                     break;
             }
         }
-        map.createPane('pane_BuchananCommunity_1');
-        map.getPane('pane_BuchananCommunity_1').style.zIndex = 401;
-        map.getPane('pane_BuchananCommunity_1').style['mix-blend-mode'] = 'normal';
-        var layer_BuchananCommunity_1 = new L.geoJson(json_BuchananCommunity_1, {
+        map.createPane('pane_BuchananCommunity_2');
+        map.getPane('pane_BuchananCommunity_2').style.zIndex = 402;
+        map.getPane('pane_BuchananCommunity_2').style['mix-blend-mode'] = 'normal';
+        var layer_BuchananCommunity_2 = new L.geoJson(json_BuchananCommunity_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_BuchananCommunity_1',
-            layerName: 'layer_BuchananCommunity_1',
-            pane: 'pane_BuchananCommunity_1',
-            onEachFeature: pop_BuchananCommunity_1,
-            style: style_BuchananCommunity_1_0,
+            dataVar: 'json_BuchananCommunity_2',
+            layerName: 'layer_BuchananCommunity_2',
+            pane: 'pane_BuchananCommunity_2',
+            onEachFeature: pop_BuchananCommunity_2,
+            style: style_BuchananCommunity_2_0,
         });
-        bounds_group.addLayer(layer_BuchananCommunity_1);
-        map.addLayer(layer_BuchananCommunity_1);
+        bounds_group.addLayer(layer_BuchananCommunity_2);
+        map.addLayer(layer_BuchananCommunity_2);
         setBounds();
         map.addControl(new L.Control.Search({
-            layer: layer_BuchananCommunity_1,
+            layer: layer_BuchananCommunity_2,
             initial: false,
             hideMarkerOnCollapse: true,
             propertyName: 'Communityy Name'}));
         document.getElementsByClassName('search-button')[0].className +=
          ' fa fa-binoculars';
-        resetLabels([layer_BuchananCommunity_1]);
+        resetLabels([layer_Ondo_WO_1_1,layer_BuchananCommunity_2]);
         map.on("zoomend", function(){
-            resetLabels([layer_BuchananCommunity_1]);
+            resetLabels([layer_Ondo_WO_1_1,layer_BuchananCommunity_2]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_BuchananCommunity_1]);
+            resetLabels([layer_Ondo_WO_1_1,layer_BuchananCommunity_2]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_BuchananCommunity_1]);
+            resetLabels([layer_Ondo_WO_1_1,layer_BuchananCommunity_2]);
         });
         </script>
     </body>
